@@ -45,7 +45,7 @@ To test the logger functionality:
    npm run post
    ```
 
-   Or send POST requests to <http://localhost:4000/request> manually using any
+   Or send POST requests to <http://localhost:4000/record> manually using any
    of these methods:
 
    - Using curl
