@@ -1,0 +1,17 @@
+{
+	"name": "clickhouse-express-logger",
+	"version": "1.0.0",
+	"description": "",
+	"main": "index.js",
+	"scripts": {
+		"start": "node index.js",
+		"docker": "docker compose up -d",
+		"post": "node post.js"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"@clickhouse/client": "^1.11.1",
+		"express": "^5.1.0"
+	}
+}
