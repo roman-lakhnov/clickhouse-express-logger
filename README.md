@@ -21,7 +21,7 @@ Make sure Docker is running before starting the application:
 npm install
 
 # Start ClickHouse and Grafana containers
-docker-compose up -d
+npm run docker
 
 # Start the server
 npm start
@@ -141,16 +141,16 @@ data. Follow these steps to set up Grafana dashboards:
 
 ```bash
 # Start the ClickHouse container
-docker-compose up -d
+docker compose up -d
 
 # Check container status
 docker ps
 
 # Stop the containers
-docker-compose down
+docker compose down
 
 # Remove containers and volumes completely
-docker-compose down -v
+docker compose down -v
 ```
 
 <!--
