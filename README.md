@@ -1,4 +1,4 @@
-# ClickHouse Express Logger
+# ClickHouse Grafana Express Logger
 
 ## About
 
