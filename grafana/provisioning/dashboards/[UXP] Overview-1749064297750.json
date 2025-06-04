@@ -156,7 +156,7 @@
           },
           "pluginVersion": "4.9.0",
           "queryType": "traces",
-          "rawSql": "SELECT\n  toDate(timestamp) AS date,\n  count(*) AS Count\nFROM \"express_logger\".\"records\"\nWHERE timestamp >= now() - INTERVAL 30 DAY\nGROUP BY date\nORDER BY date\n",
+          "rawSql": "SELECT\n   toDateTime(responseInTs / 1000) AS date,\n  count(*) AS Count\nFROM \"express_logger\".\"records\"\n-- WHERE timestamp >= now() - INTERVAL 30 DAY\nGROUP BY date\nORDER BY date\n",
           "refId": "A"
         }
       ],
@@ -550,8 +550,8 @@
     "list": []
   },
   "time": {
-    "from": "now-30d",
-    "to": "now"
+    "from": "2025-06-04T18:14:00.027Z",
+    "to": "2025-06-04T18:14:18.000Z"
   },
   "timepicker": {},
   "timezone": "browser",

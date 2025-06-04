@@ -50,7 +50,8 @@ async function initDB() {
 				requestSoapSize Int32,
 				responseOutTs Int64,
 				responseSoapSize Int32,
-				succeeded Bool
+				succeeded Bool,
+				clientSubsystemCode String
 				)
 				ENGINE = MergeTree()
 				ORDER BY timestamp
@@ -105,6 +106,7 @@ app.use(async (req, res, next) => {
 			requestSoapSize: record.requestSoapSize || 0,
 			responseOutTs: record.responseOutTs || 0,
 			responseSoapSize: record.responseSoapSize || 0,
+			clientSubsystemCode: record.clientSubsystemCode || '',
 			succeeded:
 				typeof record.succeeded === 'boolean' ? record.succeeded : false
 		}

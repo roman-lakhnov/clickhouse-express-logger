@@ -2,7 +2,9 @@
 
 ## About
 
-This project provides a simple transaction collector API implementation that works with ClickHouse. It includes Docker Compose configuration for ClickHouse and Grafana, making it easy to set up a complete testing environment.
+This project provides a simple transaction collector API implementation that
+works with ClickHouse. It includes Docker Compose configuration for ClickHouse
+and Grafana, making it easy to set up a complete testing environment.
 
 ## Requirements
 
@@ -55,31 +57,32 @@ To test the API functionality:
    {
      "records": [
        {
-         "serviceXRoadInstance": "test1",
-         "serviceCode": "clientReg",
-         "serviceSecurityServerAddress": "192.168.99.185",
-         "requestAttachmentCount": 0,
-         "requestOutTs": 1748684367108,
-         "serviceSubsystemCode": "MGMT",
-         "responseAttachmentCount": 0,
-         "clientMemberCode": "00000089",
-         "requestType": "SOAP",
-         "responseInTs": 1748684368473,
-         "messageProtocolVersion": "4.0",
-         "messageId": "ae6da682-ccf5-4d65-b13b-7a67b833d131",
-         "clientXRoadInstance": "test1",
-         "clientMemberClass": "GOV",
-         "serviceMemberCode": "00000001",
-         "transactionId": "24b6d06c-3e03-11f0-a847-c3ae802a6ac1",
-         "securityServerType": "Client",
-         "securityServerInternalIp": "192.168.99.203",
-         "serviceMemberClass": "GOV",
-         "requestInTs": 1748684367043,
-         "clientSecurityServerAddress": "192.168.99.203",
-         "requestSoapSize": 1285,
-         "responseOutTs": 1748684368630,
-         "responseSoapSize": 1522,
-         "succeeded": true
+      serviceXRoadInstance: 'test1',
+      serviceCode: 'clientReg',
+      serviceSecurityServerAddress: '192.168.99.185',
+      requestAttachmentCount: 0,
+      requestOutTs: 1748684367108,
+      serviceSubsystemCode: 'MGMT',
+      responseAttachmentCount: 0,
+      clientMemberCode: '00000089',
+      requestType: 'SOAP',
+      responseInTs: 1748684368473,
+      messageProtocolVersion: '4.0',
+      messageId: 'ae6da682-ccf5-4d65-b13b-7a67b833d131',
+      clientXRoadInstance: 'test1',
+      clientMemberClass: 'GOV',
+      serviceMemberCode: '00000001',
+      transactionId: '24b6d06c-3e03-11f0-a847-c3ae802a6ac1',
+      securityServerType: 'Client',
+      securityServerInternalIp: '192.168.99.203',
+      serviceMemberClass: 'GOV',
+      requestInTs: 1748684367043,
+      clientSecurityServerAddress: '192.168.99.203',
+      requestSoapSize: 1285,
+      responseOutTs: 1748684368630,
+      responseSoapSize: 1522,
+      clientSubsystemCode: 'CLIENT',
+      succeeded: true,
        }
      ]
    }
@@ -119,7 +122,9 @@ data. Follow these steps to set up Grafana dashboards:
    - Username: `admin`
    - Password: `admin`
 3. You'll be prompted to change the password on first login.
-4. Default datasource configuration is already imported. If you want to do it manually - go to "Add data source" and download the ClickHouse Plugin for Grafana:
+4. Default datasource configuration is already imported. If you want to do it
+   manually - go to "Add data source" and download the ClickHouse Plugin for
+   Grafana:
 
    ![Grafana Data Source Configuration](grafana/dataSource3.png)
 
@@ -130,8 +135,9 @@ data. Follow these steps to set up Grafana dashboards:
 
    Click "Save & Test" to verify the connection.
 
-6. Default dashboard configuration is already imported. If you want to do it manually - go to Dashboard > Import. Import `grafanaDashboard.json` to use suggested
-   panels or create your own:
+6. Default dashboard configuration is already imported. If you want to do it
+   manually - go to Dashboard > Import. Import `grafanaDashboard.json` to use
+   suggested panels or create your own:
 
    ![Grafana Dashboard Example](grafana/dashboardExample.png)
 

@@ -25,7 +25,8 @@ exports.requestExample = {
 			requestSoapSize: 1285,
 			responseOutTs: 1748684368630,
 			responseSoapSize: 1522,
-			succeeded: true
-		}
-	]
+			clientSubsystemCode: 'CLIENT',
+			succeeded: true,
+		},
+		]
 }
