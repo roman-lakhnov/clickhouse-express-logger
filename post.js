@@ -1,8 +1,10 @@
 const http = require('http')
 const { requestExample } = require('./requestExample')
+require('dotenv').config()
 
-const POST_INTERVAL_MS = 50 
-const TARGET_URL = 'http://localhost:4000/record'
+const POST_INTERVAL_MS = parseInt(process.env.POST_INTERVAL_MS)
+const PORT = process.env.EXPRESS_PORT
+const TARGET_URL = `http://localhost:${PORT}/record`
 
 const data = JSON.stringify(requestExample)
 

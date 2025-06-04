@@ -1,10 +1,8 @@
-# ClickHouse Grafana Express Logger
+# ClickHouse+Grafana+Express Transaction Collector
 
 ## About
 
-This project provides a simple logging API implementation that works with
-ClickHouse. It includes Docker Compose configuration for ClickHouse, making it
-easy to set up a complete logging environment.
+This project provides a simple transaction collector API implementation that works with ClickHouse. It includes Docker Compose configuration for ClickHouse and Grafana, making it easy to set up a complete testing environment.
 
 ## Requirements
 
@@ -36,7 +34,7 @@ The server will:
 
 ## Testing
 
-To test the logger functionality:
+To test the API functionality:
 
 1. Open a second terminal to populate the database by sending a POST request to
    the API with body data from requestExample:
@@ -45,8 +43,8 @@ To test the logger functionality:
    npm run post
    ```
 
-   Or send POST requests to <http://localhost:4000/record> manually using any
-   of these methods:
+   Or send POST requests to <http://localhost:4000/record> manually using any of
+   these methods:
 
    - Using curl
    - Using Postman
@@ -121,18 +119,18 @@ data. Follow these steps to set up Grafana dashboards:
    - Username: `admin`
    - Password: `admin`
 3. You'll be prompted to change the password on first login.
-4. Go to "Add data source" and download ClickHouse Plugin for Grafana:
+4. Default datasource configuration is already imported. If you want to do it manually - go to "Add data source" and download the ClickHouse Plugin for Grafana:
 
    ![Grafana Data Source Configuration](grafana/dataSource3.png)
 
-5. Setup the data source:
+5. Set up the data source:
 
    ![Grafana Data Source Configuration](grafana/dataSource1.png)
    ![Grafana Data Source Configuration](grafana/dataSource2.png)
 
    Click "Save & Test" to verify the connection.
 
-6. Go to Dashboard > Import. Import `grafanaDashboard.json` to use suggested
+6. Default dashboard configuration is already imported. If you want to do it manually - go to Dashboard > Import. Import `grafanaDashboard.json` to use suggested
    panels or create your own:
 
    ![Grafana Dashboard Example](grafana/dashboardExample.png)
@@ -140,7 +138,7 @@ data. Follow these steps to set up Grafana dashboards:
 ### Managing Docker Containers
 
 ```bash
-# Start the ClickHouse container
+# Start the ClickHouse and Grafana containers
 docker compose up -d
 
 # Check container status
@@ -153,7 +151,35 @@ docker compose down
 docker compose down -v
 ```
 
+## Environment Variables
+
+This project uses environment variables for configuration. Create a `.env` file
+in the root directory with the following variables:
+
+```bash
+# ClickHouse Configuration
+CLICKHOUSE_PORT=8123
+CLICKHOUSE_INTERSERVER_PORT=9000
+CLICKHOUSE_USER=default
+CLICKHOUSE_PASSWORD=clickhouse
+CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT=1
+CLICKHOUSE_HOST=localhost
+CLICKHOUSE_DATABASE=express_logger
+CLICKHOUSE_TABLE=records
+
+# Grafana Configuration
+GRAFANA_PORT=3000
+GRAFANA_ADMIN_USER=admin
+GRAFANA_ADMIN_PASSWORD=admin
+GRAFANA_PLUGINS=grafana-clickhouse-datasource
+
+# Express Configuration
+EXPRESS_PORT=4000
+
+# Testing Configuration
+POST_INTERVAL_MS=50
+```
+
 <!--
 TODO server logging with levels
-
-TODO env -->
+-->

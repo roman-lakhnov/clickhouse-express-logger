@@ -1,28 +1,30 @@
 const express = require('express')
 const { createClient } = require('@clickhouse/client')
+require('dotenv').config()
 
 const app = express()
-const port = 4000
+const port = process.env.EXPRESS_PORT
 
 const client = createClient({
-	url: 'http://localhost:8123',
-	username: 'default',
-	password: 'clickhouse'
+	url: `http://${process.env.CLICKHOUSE_HOST}:${process.env.CLICKHOUSE_PORT}`,
+	username: process.env.CLICKHOUSE_USER,
+	password: process.env.CLICKHOUSE_PASSWORD
 })
 
 app.use(express.json())
 
 async function initDB() {
 	try {
-		console.log('Initializing database...')
+		const dbName = process.env.CLICKHOUSE_DATABASE
+		console.log(`Initializing database ${dbName}...`)
 		await client.query({
-			query: `CREATE DATABASE IF NOT EXISTS express_logger`
+			query: `CREATE DATABASE IF NOT EXISTS ${dbName}`
 		})
 		console.log('Database created or already exists')
 
 		await client.query({
 			query: `
-			CREATE TABLE IF NOT EXISTS express_logger.records (
+			CREATE TABLE IF NOT EXISTS ${process.env.CLICKHOUSE_DATABASE}.${process.env.CLICKHOUSE_TABLE} (
 				timestamp DateTime64(3),
 				serviceXRoadInstance String,
 				serviceCode String,
@@ -72,13 +74,11 @@ app.use(async (req, res, next) => {
 		.replace('Z', '')
 
 	const recordData =
-		req.body && req.body.records && req.body.records
-			? req.body.records
-			: []
+		req.body && req.body.records && req.body.records ? req.body.records : []
 
-	const records=[]
+	const records = []
 
-	recordData.forEach((record) => {
+	recordData.forEach(record => {
 		const formattedRecord = {
 			timestamp: formattedTimestamp,
 			serviceXRoadInstance: record.serviceXRoadInstance || '',
@@ -114,8 +114,7 @@ app.use(async (req, res, next) => {
 	// Send to ClickHouse
 	try {
 		await client.insert({
-			table: 'express_logger.records',
-			// values: [record],
+			table: `${process.env.CLICKHOUSE_DATABASE}.${process.env.CLICKHOUSE_TABLE}`,
 			values: records,
 			format: 'JSONEachRow'
 		})
@@ -131,6 +130,8 @@ app.post('/record', (req, res) => {
 
 app.listen(port, () => {
 	console.log(`Server listening at http://localhost:${port}`)
-	console.log(`ClickHouse query http://localhost:8123/play`)
-	console.log(`Grafana dashboard http://localhost:3000`)
+	console.log(
+		`ClickHouse query http://${process.env.CLICKHOUSE_HOST}:${process.env.CLICKHOUSE_PORT}/play`
+	)
+	console.log(`Grafana dashboard http://localhost:${process.env.GRAFANA_PORT}`)
 })

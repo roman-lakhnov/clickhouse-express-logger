@@ -4,14 +4,15 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"docker": "docker compose --env-file .env up -d",
 		"start": "node index.js",
-		"docker": "docker compose up -d",
 		"post": "node post.js"
 	},
 	"author": "",
 	"license": "ISC",
 	"dependencies": {
 		"@clickhouse/client": "^1.11.1",
+		"dotenv": "^16.5.0",
 		"express": "^5.1.0"
 	}
 }
